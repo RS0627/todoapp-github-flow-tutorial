@@ -1,15 +1,22 @@
-$("#addTodo").click(function() {
-    const inputTodo = $("input").val();
-    $("#todoList").append("<li><input type='checkbox'>" + inputTodo + "</li>")
-    $("input").val("");
+$("#addTodoButton").click(function() {
+    const inputTodo = $("#newTodoInput").val().trim();
+  
+    if (!inputTodo) {
+      return;
+    }
+  
+    const todoItem = $("<li>").append(
+      $("<input>").attr("type", "checkbox"),
+      $("<span>").text(inputTodo)
+    );
+  
+    $("#todoList").append(todoItem);
+    $("#newTodoInput").val("");
 });
 
-$(document).on("change", "input[type=checkbox]", function() {
-    if($(this).is(":checked")) {
-        $(this).parent().css("text-decoration", "line-through")
-        $(this).parent().css("color", "#ccc")
-    } else {
-        $(this).parent().css("text-decoration", "none")
-        $(this).parent().css("color", "#000")
-    }
+$("#todoList").on("click", "input[type=checkbox]", function() {
+    const isChecked = $(this).is(":checked");
+    const parentItem = $(this).parent();
+  
+    parentItem.toggleClass("done", isChecked);
 });
