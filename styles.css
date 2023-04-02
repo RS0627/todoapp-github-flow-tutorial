@@ -2,4 +2,6 @@
     text-decoration: line-through;
     color: #ccc;
   }
-  
+body {
+  background-color: beige;
+}
